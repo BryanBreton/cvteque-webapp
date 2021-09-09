@@ -66,7 +66,7 @@ export default {
 </script>
 <style>
 .all{
-        background-image: url("../assets/etudiants.jpg");
+        color: white;
         background-size: 100% 100%;
         position:absolute;
         top:0%;

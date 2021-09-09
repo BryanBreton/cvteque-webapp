@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/Home.vue'
 import Etudiant from '../views/Etudiant.vue'
+import Entreprise from '../views/Entreprise.vue'
 import OffreLike from '../views/OffreLike.vue'
 import MyProfile from '../views/MyProfile.vue'
 
@@ -24,11 +25,15 @@ export default new Router({
       name: 'OffreLike',
       component: OffreLike
     },
-    
     {
       path: '/profile',
       name: 'MyProfile',
       component: MyProfile
+    },
+    {
+      path: '/entreprise',
+      name: 'Entreprise',
+      component: Entreprise
     }
   ]
 })

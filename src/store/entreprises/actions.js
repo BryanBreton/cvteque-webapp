@@ -6,13 +6,15 @@ const actions= {
                 authorization: pseudo+':'+pwd
             }
         }
-        axios.get('http://localhost:3000/connexion/entreprise', config).then(response => {
+        axios.get('http://localhost:3000/connexionEntreprise', config).then(response => {
+            console.log(2);
+            console.log(response);
             let company = response
             commit('setCurrentCompany', company)
         }).catch(error => {
             console.log(error)
         })
     }
-    }
+}
 
 export default actions

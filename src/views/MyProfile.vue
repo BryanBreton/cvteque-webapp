@@ -1,61 +1,75 @@
 <template>
     <div>
-        <div class="student">
-            <v-container>
-                {{currentUser}}
-                <h1>ouiiiiiiiiiiiiiiiiiii</h1>
-                <div class="container">
-    <div class="large-12 medium-12 small-12 cell">
-      <label>File
-        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-      </label>
-        <button v-on:click="submitFile()">Submit</button>
-    </div>
-  </div>
-            </v-container>
-        </div>   
+      <Navbar />
+      <v-template >
+        <div class="user">
+        <h2>Présentation</h2>
+        <h3>{{user.nom}} {{user.prenom}}</h3>
+        <h4>Date de Naissance</h4>{{user.date_naissance}}
+        <h4>email :</h4> {{user.email}}
+        <h2>
+          Experiences
+        </h2>
+        <div class="experiences" v-for="exp in user.experiences" :key="exp.id">
+          {{exp.poste}} - {{exp.entreprise}} ({{exp.date_debut}} - {{exp.date_fin}})
+        </div>
+        <h2>
+          Formations
+        </h2>
+        <div class="formation" v-for="forma in user.formations" :key="forma.id">
+          {{forma.diplome}} - {{forma.ecole}} {{forma.ville}} ({{forma.date_debut}} - {{forma.date_fin}})
+        </div>
+        </div>
+      </v-template>
+           
     </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import axios from 'axios'
-//import Navbar from '../components/Navbar'
+import VueJwtDecode from 'vue-jwt-decode'
+// import jwt from 'jsonwebtoken'
+import Navbar from '../components/Navbar'
 export default {
     data: () => ({
     //
-        file: ''
+        file: '',
+        user: {}
     }),
     methods:{
-        handleFileUpload(){
-            this.file = this.$refs.file.files[0];
-        },
-        submitFile(){
-            let formData = new FormData();
-            formData.append('file', this.file);
-            axios.post( 'http://localhost:3000/file',
-                formData,
-                {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-              }
-            ).then(function(){
-          console.log('SUCCESS!!');
+      decode(code){
+        const decoded = VueJwtDecode.decode(code)
+        console.log('test')
+        console.log(decoded);
+      },
+      getUserInfo(){
+        axios.get('http://localhost:3000/etudiants/'+this.currentUser.id, {headers:{"jwt-token": this.currentUser.token}}).then(res => {
+          console.log("par la");
+          console.log(res.data);
+          this.user = res.data
         })
-        .catch(function(){
-          console.log('FAILURE!!');
-        });
-        }
+      }
+      
     },
     components:{
-      //  Navbar
+      Navbar
     },
     computed:{
         ...mapState('etudiantStore', ['currentUser'])
+    },
+    mounted(){
+      this.decode(this.currentUser.token)
+      this.getUserInfo()
+    },
+    created(){
+      this.getUserInfo()
     }
 }
 </script>
-<style lang="scss">
-    
+<style>
+.user{
+  margin-left: 1% !important;
+  margin-top: 5% !important;
+}
 </style>

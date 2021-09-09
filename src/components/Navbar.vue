@@ -20,7 +20,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
+      <v-btn icon @click="redirectProfile()">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
@@ -39,6 +39,9 @@ export default {
   methods:{
     redirectLike(){
       this.$router.push({name: 'OffreLike'})
+    },
+    redirectProfile(){
+      this.$router.push({name: "MyProfile"})
     }
   }
 }

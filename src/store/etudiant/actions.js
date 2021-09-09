@@ -6,6 +6,7 @@ const actions= {
                 authorization: email+":"+pwd
             }
         }).then(response => {
+            console.log(response);
             let user = response
             commit('setCurrentUser', user)
         }).catch(error => {

@@ -85,6 +85,7 @@ export default {
     methods:{
         connexionEtudiant: async function(){
             await this.$store.dispatch('etudiantStore/connexion', {email: this.email, pwd: this.passwordEtudiant}).then(setTimeout(() => {
+                console.log(1);
                 if(this.currentUser != "Email ou mot de passe incorrect"){
                     this.$router.push({name: "Etudiant"})
                 }
@@ -93,9 +94,10 @@ export default {
         connexionEntreprise: function(){
             this.$store.dispatch('companyStore/connexion', {pseudo: this.pseudo, pwd: this.passwordEntreprise}).then(setTimeout(() => {
                 if(this.currentCompany != "Email ou mot de passe incorrect"){
-                    // this.$router.push({name: "Etudiant"})
+                    this.$router.push({name: "Entreprise"})
+                    console.log("ouiiiiiiiiiii");
                 }
-            }, 200));
+            }, 1000));
         }
     },
     components:{
@@ -109,7 +111,8 @@ export default {
 </script>
 <style lang="scss">
     .student{
-        background-image: url("../assets/etudiants.jpg");
+        // background-image: url("../assets/etudiants.jpg");
+        color: white;
         background-size: 100% 100%;
         position:absolute;
         top:0%;
@@ -122,7 +125,8 @@ export default {
         font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
     .company{
-        background-image: url("../assets/entreprise.jpg");
+        // background-image: url("../assets/entreprise.jpg");
+        color: white;
         background-size: 100% 100%;
         position:absolute;
         top:0%;

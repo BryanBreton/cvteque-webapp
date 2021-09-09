@@ -10,7 +10,9 @@
           </v-card-title>
 
           <v-card-text>
-            Vous venez d'aimer cette annonce, vous pouvez retrouvez les annonces que vous avez aimées dans l'onglet dédié (coeur dans la barre de navigation)
+            Vous venez d'aimer cette annonce, vous pouvez retrouvez les annonces
+            que vous avez aimées dans l'onglet dédié (coeur dans la barre de
+            navigation)
           </v-card-text>
 
           <v-divider></v-divider>
@@ -24,43 +26,23 @@
         </v-card>
       </v-dialog>
 
-      <div v-for="offre in offres" :key="offre.id">
-        <v-row>
-          <v-col>
-            <v-card class="pa-md-4 ma-4 mx-lg-auto">
-              <v-card-title>
-                {{ offre.titre }}
-              </v-card-title>
-              <v-card-text>
-                {{ offre.type_offre }}
-              </v-card-text>
-              <v-btn icon @click="show = !show">
-                <v-icon>{{
-                  show ? "mdi-chevron-up" : "mdi-chevron-down"
-                }}</v-icon>
-              </v-btn>
-              <v-expand-transition>
-                <div v-show="show">
-                  <v-divider></v-divider>
-
-                  <v-card-text>
-                    {{ offre.description }}
-                  </v-card-text>
-                </div>
-              </v-expand-transition>
-              <v-footer>
-                {{ offre.nom }} - {{ offre.date_offre }}
-                <v-btn
-                  icon
-                  @click="like(offre.id, currentUser.id, currentUser.id_ecole)"
-                >
-                  <v-icon>mdi-heart</v-icon>
-                </v-btn>
-              </v-footer>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
+      <v-expansion-panels class="offres">
+        <v-expansion-panel v-for="offre in offres" :key="offre.id">
+          <v-expansion-panel-header> {{offre.titre}} - {{offre.type_offre}} </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            {{offre.description}}
+          </v-expansion-panel-content>
+          <v-footer>
+            {{ offre.nom }} - {{ offre.date_offre }}
+            <v-btn
+              icon
+              @click="like(offre.id, currentUser.id, currentUser.id_ecole)"
+            >
+              <v-icon>mdi-heart</v-icon>
+            </v-btn>
+          </v-footer>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-container>
   </div>
 </template>
@@ -113,7 +95,7 @@ export default {
               )
               .then((resp) => {
                 this.offres = resp.data;
-                this.dialog = true
+                this.dialog = true;
               });
           }
         });
@@ -125,7 +107,7 @@ export default {
 </script>
 <style>
 .all {
-  background-image: url("../assets/etudiants.jpg");
+  color: white;
   background-size: 100% 100%;
   position: absolute;
   top: 0%;
@@ -136,5 +118,8 @@ export default {
   margin: 0;
   padding: 0;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.offres{
+  margin-top: 5%;
 }
 </style>
