@@ -1,5 +1,6 @@
 const state = {
     userOffres: [],
-    userLikedOffres: []
+    userLikedOffres: [],
+    likes: []
 }
 export default state

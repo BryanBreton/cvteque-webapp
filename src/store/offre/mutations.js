@@ -6,6 +6,9 @@ const mutations = {
     },
     setLikedOffers(state, offres){
         state.userLikedOffres = offres.data
+    },
+    setLikes(state, likes){
+        state.likes = likes
     }
     
 }

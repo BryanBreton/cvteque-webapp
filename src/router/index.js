@@ -5,6 +5,7 @@ import Etudiant from '../views/Etudiant.vue'
 import Entreprise from '../views/Entreprise.vue'
 import OffreLike from '../views/OffreLike.vue'
 import MyProfile from '../views/MyProfile.vue'
+import Likes from '../views/Likes.vue'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/entreprise',
       name: 'Entreprise',
       component: Entreprise
+    },
+    {
+      path: '/likes',
+      name: 'Likes',
+      component: Likes
     }
   ]
 })

@@ -19,6 +19,14 @@ const actions= {
         }).catch(error => {
             console.log(error)
         })
+    },
+    getLikeByOffre({commit}, idOffre){
+        axios.get('http://localhost:3000/like/offres/'+idOffre).then(resp => {
+            console.log(resp.data)
+            commit('setLikes', resp.data)
+        }).catch(error => {
+            console.log(error)
+        })
     }
 }
 
